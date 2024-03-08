@@ -85,7 +85,7 @@ Now numpy style docstring documentation for your function!
 ```{python}
 def mpg_to_kml(m):
     """
-    Converts the given miles per gallon (m) to kilometers per litre.
+    Converts the given miles per gallon (m) to kilometers per liter.
 
     Parameters
     ----------
@@ -101,7 +101,6 @@ def mpg_to_kml(m):
     ------
     ValueError
         If the input is not an integer or float.
-    ValueError
         If the input is a negative integer or float.
 
     Examples
@@ -115,8 +114,10 @@ def mpg_to_kml(m):
     if not isinstance(m, (int, float)):
         raise ValueError("Input must be an integer or float.")
     if m < 0:
-        raise ValueError("Input must be a positive number.")
+        raise ValueError("Input must be a positive integer or float.")
     return m * 0.425144
+
+?mpg_to_kml
 ```
 
 ## Solutions
