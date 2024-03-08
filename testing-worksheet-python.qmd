@@ -1,0 +1,145 @@
+---
+title: "Testing in Python worksheet"
+format: html
+---
+
+Welcome to the testing in R worksheet! This is designed to give you some hands-on practice with testing syntax in R. Run the cell below to load the libraries needed for this worksheet, and to check your answers as you go!
+
+```{python}
+import pytest
+```
+
+### Exercise 1
+
+*Solution posted at end of worksheet.*
+
+Write a function called `mpg_to_kml` that takes a vector of numbers in miles per gallon units and converts it to a vector in kilometeres per litre.
+
+*Hint: 1 mile per gallon is 0.425144 kilometres per litre.*
+
+```{python}
+def mpg_to_kml():
+  pass
+
+#mpg_to_kml(1)
+```
+
+### Exercise 2
+
+*Solution posted at end of worksheet.*
+
+Write **at least** two assertions inside of test function to ensure that your function works as expected (i.e., do you get back expected values given your input values - is the math correct?).
+
+*Hint: test edge cases that you can compute by hand, and be sure of your answer!*
+
+<img src="img/unit-tests.png" width="350"/>
+
+*Source: Austin Powers + http://www.quickmeme.com/meme/3ua14n*
+
+```{python}
+# YOUR CODE HERE
+```
+
+### Exercise 3
+
+*Solution posted at end of worksheet.*
+
+Add one or more exceptions to your `mpg_to_kml` function so that you can handle inappropriate user input, such as strings, lists or numpy arrays.
+
+<img src="img/fail-you-will-fail-fast-you-should.jpg" width="300"/>
+
+*Source: Star Wars + https://memegenerator.net/*
+
+### Exercise 4
+
+*Solution posted at end of worksheet.*
+
+Now write **at least** two assertions inside of a test function to ensure that your function fails as expected (i.e., does your function throw errors when incorrect inputs are given?).
+
+```{python}
+# YOUR CODE HERE
+```
+
+### Exercise 5
+
+*Solution posted at end of worksheet.*
+
+Now numpy style docstring documentation for your function!
+
+```{python}
+# YOUR CODE HERE
+```
+
+## Solutions
+
+### Exercise 1 solution
+
+```         
+def: mpg_to_kml(x):
+    return x * 0.425144
+```
+
+### Exercise 2 solution
+
+```         
+def test_mpg_to_kml():
+    '''Should return expected values from converting miles to gallon 
+    to kilometers to litres.'''
+    assert mpg_to_kml(1) == pytest.approx(0.425144)
+    assert mpg_to_kml(2) == pytest.approx(0.850288)
+    assert mpg_to_kml(1) == pytest.approx(4.25144) 
+```
+
+### Exercise 3 solution
+
+```         
+def mpg_to_kml(x):
+    if not isinstance(x, (int, float)):
+        raise ValueError("Input must be a number.")
+    return x * 0.425144
+```
+
+### Exercise 4 solution
+
+```
+def test_mpg_to_kml():
+    '''Should throw exceptions when strings or lists are given as input.'''         
+    with pytest.raises(ValueError):
+        mpg_to_kml("a")
+
+    with pytest.raises(ValueError):
+        mpg_to_kml([10, 20, 30])  
+```
+
+### Exercise 5 solution
+
+Numpy style docstring documentation only:
+
+```         
+    """
+    Convert miles per gallon to kilometers per liter.
+
+    Parameters
+    ----------
+    mpg : float or int
+        Fuel efficiency in miles per gallon.
+
+    Returns
+    -------
+    float
+        Fuel efficiency in kilometers per liter.
+
+    Raises
+    ------
+    ValueError
+        If the input is not a scalar (integer or float).
+
+    Examples
+    --------
+    >>> mpg_to_kml(10)
+    4.25144
+
+    >>> mpg_to_kml(25)
+    10.6286
+    """
+```
