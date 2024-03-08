@@ -18,10 +18,14 @@ Write a function called `mpg_to_kml` that takes a vector of numbers in miles per
 *Hint: 1 mile per gallon is 0.425144 kilometres per litre.*
 
 ```{python}
-def mpg_to_kml():
-  pass
+def mpg_to_kml(m):
+    if not isinstance(m, (int, float)):
+        raise ValueError("Input must be an integer or float.")
+    if m < 0:
+        raise ValueError("Input must be a positive number.")
+    return m * 0.425144
 
-#mpg_to_kml(1)
+mpg_to_kml(1)
 ```
 
 ### Exercise 2
@@ -37,7 +41,19 @@ Write **at least** two assertions inside of test function to ensure that your fu
 *Source: Austin Powers + http://www.quickmeme.com/meme/3ua14n*
 
 ```{python}
-# YOUR CODE HERE
+def test_mpg_to_kml():
+    '''Should return expected values from converting miles per gallon 
+    to kilometers per litre or an Excepetion when a non-number or a negative number is inputted.'''
+    assert mpg_to_kml(1) == pytest.approx(0.425144)
+    assert mpg_to_kml(2) == pytest.approx(0.850288)
+    assert mpg_to_kml(10) == pytest.approx(4.25144) 
+    assert mpg_to_kml(0) == pytest.approx(0)
+    with pytest.raises(ValueError):
+        mpg_to_kml(-1.3)
+    with pytest.raises(ValueError):
+        mpg_to_kml("hello")
+    with pytest.raises(ValueError):
+        mpg_to_kml([0, 1])
 ```
 
 ### Exercise 3
@@ -67,7 +83,40 @@ Now write **at least** two assertions inside of a test function to ensure that y
 Now numpy style docstring documentation for your function!
 
 ```{python}
-# YOUR CODE HERE
+def mpg_to_kml(m):
+    """
+    Converts the given miles per gallon (m) to kilometers per litre.
+
+    Parameters
+    ----------
+    m : float or int
+        Fuel efficiency in miles per gallon.
+
+    Returns
+    -------
+    float
+        Fuel efficiency in kilometers per liter.
+
+    Raises
+    ------
+    ValueError
+        If the input is not an integer or float.
+    ValueError
+        If the input is a negative integer or float.
+
+    Examples
+    --------
+    >>> mpg_to_kml(10)
+    4.25144
+
+    >>> mpg_to_kml(25)
+    10.6286
+    """
+    if not isinstance(m, (int, float)):
+        raise ValueError("Input must be an integer or float.")
+    if m < 0:
+        raise ValueError("Input must be a positive number.")
+    return m * 0.425144
 ```
 
 ## Solutions
